@@ -30,7 +30,7 @@ bool bluetooth = 0;     // activate bluetooth (and command system)
 bool backupFlag = 0;    // allow backing up instead of turning 180 degrees
 bool abort_run = 0;
 
-// * supposed to be in a header file
+// * this line is supposed to be in a header file
 bool commandIs(const char* token, const char* cmd, bool firstchar=false);
 
 void setup() {
