@@ -10,7 +10,7 @@
 #include <algorithm>
 
 #define BUFSIZE 20  // bluetooth buffer
-enum LED_Color { LED_RED, LED_BLUE, LED_GREEN };
+enum LED_Color { LED_RED, LED_GREEN, LED_BLUE };
 
 using namespace pins;
 
@@ -26,7 +26,7 @@ RGB_LED* frontRgb;
 int command_flag = 0;   // wait for a command or button press
 int swap_flag = 0;      // if true return to the start
 char command[BUFSIZE];  // buffer to hold bluetooth commands
-bool bluetooth = 0;     // activate bluetooth (and command system)
+bool bluetooth = true;     // activate bluetooth (and command system)
 bool backupFlag = 0;    // allow backing up instead of turning 180 degrees
 bool abort_run = 0;
 
@@ -82,15 +82,22 @@ void setup() {
     maze->initializeMaze();
     maze->setBoundaryWalls();
 
-    if (bluetooth) {
-        backRgb->flashLED(LED_BLUE);
-        bluetoothInitialize();
-        command[0] = '\0';
-    }
     backRgb->flashLED(LED_GREEN);
 
     driver->encoderOnlyFlag = true;
     driver->imuOn = false;
+
+    if (bluetooth) {
+        backRgb->flashLED(LED_BLUE);
+        // bluetoothInitialize blocks the program until you connect a BT device
+        bluetoothInitialize();
+        command[0] = '\0';
+    }
+
+    // confirms that a BT device has been connected
+    // On Mac, just use Adafruit Bluefruit LE Connect from app store
+    frontRgb->flashLED(LED_BLUE);
+
 }
 
 
