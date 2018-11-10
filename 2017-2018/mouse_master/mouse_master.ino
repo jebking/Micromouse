@@ -106,6 +106,8 @@ void loop() {
 
     // * not clear exactly what's going on, but looks like it's for
     // * going back to the start when finishing maze
+    // ** even or odd means that the run is coming from start to end
+    // * or from end back to start
     if ( (maze->currPos == maze->goalPos  && maze->counter % 2 == 0)
       || (maze->currPos == maze->startPos && maze->counter % 2 == 1))
     {
@@ -146,6 +148,7 @@ void loop() {
         driver->shortTofWallReadings[RIGHTDIAG]);
 
     // only print the walls on the speedrun
+    // * adham says maybe only supposed to happen on the mapping run
     if (maze->counter == 0) {
         debug_print("Walls:");
         for (int i = 0; i < 4; i++) {

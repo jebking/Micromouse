@@ -36,6 +36,7 @@ Motor::Motor(
         &_pidInput,
         &_pidOutput,
         &_pidSetpoint,
+        // m for motors
         p_m,
         i_m,
         d_m,
